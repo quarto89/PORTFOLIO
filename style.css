@@ -65,7 +65,7 @@ body {
 
 .hero-box {
   width: 100%;
-  max-width: 900px; /* 홈 화면 이미지를 키우고 싶다면 이 숫자를 늘려주세요 (예: 1100px) */
+  max-width: 900px;
 }
 
 .hero-box img {
@@ -75,31 +75,18 @@ body {
   border-radius: 4px;
 }
 
-/* 🌊 갤러리 전체 컨테이너 */
+/* 🌊 갤러리 전체 컨테이너 (PC 기본: 3열 그리드 구조) */
 .gallery-container {
   flex: 1;
   padding: 60px 40px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* PC에서 3열 배치 */
   gap: 30px;
   overflow-y: auto;         
   overflow-x: hidden;       
   height: 100vh;
   box-sizing: border-box;
-}
-
-/* 3개의 열 */
-.gallery-column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  /* padding-bottom은 지웁니다 */
-}
-
-/* 🔴 각 열 맨 아래에 확실한 여백(60px)을 만들어주는 스페이서 */
-.gallery-spacer {
-  height: 60px;
-  flex-shrink: 0;
+  align-content: start;
 }
 
 /* 개별 작품 카드 */
@@ -108,7 +95,7 @@ body {
   border-radius: 4px;
   overflow: hidden;
   width: 100%;
-  flex-shrink: 0;           /* 🔴 공간이 부족해도 카드가 찌그러지지 않게 고정 */
+  background-color: #1a1a1a;
 }
 
 /* 이미지 박스 및 호버 기준점 */
@@ -127,13 +114,13 @@ body {
   transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-/* 🖼️ 마우스 올렸을 때 사진 변경 (어둡고 둔탁한 톤 + 약간 확대) */
+/* 🖼️ 마우스 올렸을 때 사진 변경 */
 .media-box:hover img {
   filter: brightness(0.4) grayscale(30%);
   transform: scale(1.03);
 }
 
-/* 💬 사진 위에 올려질 텍스트 오버레이 (기본 상태는 투명) */
+/* 💬 사진 위에 올려질 텍스트 오버레이 */
 .work-overlay {
   position: absolute;
   top: 0;
@@ -147,12 +134,11 @@ body {
   text-align: center;
   padding: 20px;
   box-sizing: border-box;
-  opacity: 0; /* 평소에는 안 보임 */
+  opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
-/* 💬 마우스 올렸을 때 글씨 띄우기 */
 .media-box:hover .work-overlay {
   opacity: 1;
 }
@@ -187,32 +173,23 @@ body {
     border-bottom: 1px solid #222222;
   }
 
-  /* 1. Digital & Kinetic Art와 Home 사이 여백 */
+  /* Digital & Kinetic Art와 Home 사이 여백 */
   .artist-bio {
     margin-bottom: 15px;
   }
 
+  /* 모바일에서는 그리드를 해제하고 세로 1열 흐름으로 변경 */
   .gallery-container {
     height: auto;
     overflow-y: visible;
     padding: 30px 20px;
+    display: flex;
     flex-direction: column;
     gap: 20px;
   }
 
-  /* 2. PC용 3열 구조 상자를 완전히 해제하여 순서 꼬임 방지 */
-  .gallery-column {
-    display: contents; 
-  }
-
-  /* 3. 작품 카드가 작성된 순서(1번, 2번, 3번...)대로 세로로 차곡차곡 정렬 */
   .work-card {
     width: 100%;
-    margin-bottom: 20px;
-    display: block;
-  }
-
-  .gallery-spacer {
-    display: none;
+    margin-bottom: 0;
   }
 }
