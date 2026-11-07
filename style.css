@@ -5,8 +5,8 @@ body {
   color: #ffffff;
   font-family: sans-serif;
   display: flex;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* 왼쪽 고정 메뉴바 */
@@ -19,6 +19,9 @@ body {
   box-sizing: border-box;
   border-right: 1px solid #222222;
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
 .artist-name {
@@ -32,7 +35,6 @@ body {
   color: #888888;
   font-size: 14px;
   margin: 0;
-  margin-bottom: 0; /* 안전 장치 */
 }
 
 .menu {
@@ -76,27 +78,26 @@ body {
   border-radius: 4px;
 }
 
-/* 🌊 갤러리 전체 컨테이너 (PC 3열 그리드 완벽 대응) */
+/* 🌊 갤러리 전체 컨테이너 (PC: 3열 다이얼 순서 폭포수 갤러리) */
 .gallery-container {
   flex: 1;
   padding: 60px 40px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* PC에서 3열 배치 */
-  gap: 30px;
-  overflow-y: auto;         
-  overflow-x: hidden;       
+  column-count: 3;
+  column-gap: 30px;
   box-sizing: border-box;
-  align-content: start;
-  /* 🔴 height: 100vh; 제거함 (이유: 그리드가 세로로 자연스럽게 확장되도록 하기 위함) */
+  height: auto;
 }
 
 /* 개별 작품 카드 */
 .work-card {
+  break-inside: avoid;
+  margin-bottom: 30px;
   position: relative;
   border-radius: 4px;
   overflow: hidden;
   width: 100%;
   background-color: #1a1a1a;
+  display: inline-block; /* 이미지 크기 폭주 방지 핵심 */
 }
 
 /* 이미지 박스 및 호버 기준점 */
@@ -115,7 +116,7 @@ body {
   transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-/* 🖼️ 마우스 올렸을 때 사진 변경 */
+/* 🖼️ 마우스 올렸을 때 사진 호버 효과 */
 .media-box:hover img {
   filter: brightness(0.4) grayscale(30%);
   transform: scale(1.03);
@@ -158,7 +159,7 @@ body {
   margin: 0;
 }
 
-/* 📱 화면 가로 폭이 768px 이하인 모바일 기기 */
+/* 📱 모바일 기기 (768px 이하) */
 @media screen and (max-width: 768px) {
   
   body {
@@ -169,6 +170,8 @@ body {
 
   .sidebar {
     width: 100%;
+    height: auto;
+    position: static;
     padding: 40px 30px 20px 30px;
     border-right: none;
     border-bottom: 1px solid #222222;
@@ -178,18 +181,15 @@ body {
     margin-bottom: 15px;
   }
 
-  /* 모바일에서는 3열 그리드를 해제하고 세로 1열로 변경 */
+  /* 모바일에서는 세로 1열 정렬 */
   .gallery-container {
-    height: auto;
-    overflow-y: visible;
+    column-count: 1;
     padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    gap: 0;
   }
 
   .work-card {
     width: 100%;
-    margin-bottom: 0;
+    margin-bottom: 20px;
   }
 }
