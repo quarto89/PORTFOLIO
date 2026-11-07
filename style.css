@@ -187,9 +187,9 @@ body {
     border-bottom: 1px solid #222222;
   }
 
-  /* 1. Digital & Kinetic Art와 Home 사이 간격 넓히기 */
+  /* 1. Digital & Kinetic Art와 Home 사이 여백 */
   .artist-bio {
-    margin-bottom: 15px; /* 아래쪽 여백 추가 */
+    margin-bottom: 15px;
   }
 
   .gallery-container {
@@ -200,14 +200,16 @@ body {
     gap: 20px;
   }
 
-  /* 2. PC용 3열 구조를 무시하고, 모든 작품 카드가 HTML 작성 순서(1번, 2번, 3번...)대로 세로로 차곡차곡 쌓이게 변경 */
+  /* 2. PC용 3열 구조 상자를 완전히 해제하여 순서 꼬임 방지 */
   .gallery-column {
-    display: contents; /* 컬럼 박스 자체를 없애고 안의 작품 카드들만 꺼내서 일렬로 정렬 */
+    display: contents; 
   }
 
+  /* 3. 작품 카드가 작성된 순서(1번, 2번, 3번...)대로 세로로 차곡차곡 정렬 */
   .work-card {
     width: 100%;
     margin-bottom: 20px;
+    display: block;
   }
 
   .gallery-spacer {
