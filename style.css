@@ -32,6 +32,7 @@ body {
   color: #888888;
   font-size: 14px;
   margin: 0;
+  margin-bottom: 0; /* 안전 장치 */
 }
 
 .menu {
@@ -75,18 +76,18 @@ body {
   border-radius: 4px;
 }
 
-/* 🌊 갤러리 전체 컨테이너 (컴퓨터에서는 무조건 3열 그리드 배치) */
+/* 🌊 갤러리 전체 컨테이너 (PC 3열 그리드 완벽 대응) */
 .gallery-container {
   flex: 1;
   padding: 60px 40px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 👈 이 부분이 PC 3열을 만드는 핵심입니다! */
+  grid-template-columns: repeat(3, 1fr); /* PC에서 3열 배치 */
   gap: 30px;
   overflow-y: auto;         
   overflow-x: hidden;       
-  height: 100vh;
   box-sizing: border-box;
   align-content: start;
+  /* 🔴 height: 100vh; 제거함 (이유: 그리드가 세로로 자연스럽게 확장되도록 하기 위함) */
 }
 
 /* 개별 작품 카드 */
