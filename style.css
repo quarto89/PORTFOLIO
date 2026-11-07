@@ -171,17 +171,15 @@ body {
   margin: 0;
 }
 
-/* 📱 화면 가로 폭이 768px 이하인 모바일 기기 (스마트폰, 태블릿 세로) */
+/* 📱 화면 가로 폭이 768px 이하인 모바일 기기 */
 @media screen and (max-width: 768px) {
   
-  /* 전체 페이지 레이아웃을 세로 방향(column)으로 변경하고 스크롤 허용 */
   body {
     flex-direction: column;
     height: auto;
     overflow: auto;
   }
 
-  /* 왼쪽 메뉴바를 상단 고정 또는 일반 배치로 변경 */
   .sidebar {
     width: 100%;
     padding: 40px 30px 20px 30px;
@@ -189,22 +187,29 @@ body {
     border-bottom: 1px solid #222222;
   }
 
-  /* 갤러리 컨테이너도 세로로 스크롤되도록 변경 */
+  /* 1. Digital & Kinetic Art와 Home 사이 간격 넓히기 */
+  .artist-bio {
+    margin-bottom: 15px; /* 아래쪽 여백 추가 */
+  }
+
   .gallery-container {
     height: auto;
     overflow-y: visible;
     padding: 30px 20px;
-    flex-direction: column; /* 🔴 3개의 열을 가로 배치가 아닌 세로로 뚝뚝 떨어지게 변경 */
+    flex-direction: column;
     gap: 20px;
   }
 
-  /* 3개의 열 각각도 모바일에서는 전체 폭(100%)을 쓰도록 설정 */
+  /* 2. PC용 3열 구조를 무시하고, 모든 작품 카드가 HTML 작성 순서(1번, 2번, 3번...)대로 세로로 차곡차곡 쌓이게 변경 */
   .gallery-column {
-    width: 100%;
-    gap: 20px;
+    display: contents; /* 컬럼 박스 자체를 없애고 안의 작품 카드들만 꺼내서 일렬로 정렬 */
   }
 
-  /* 모바일에서는 스페이서 불필요하므로 제거 */
+  .work-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
   .gallery-spacer {
     display: none;
   }
