@@ -34,7 +34,7 @@ body {
 .artist-bio {
   color: #888888;
   font-size: 14px;
-  margin: 0 0 15px 0;
+  margin: 0;
 }
 
 .menu {
@@ -78,24 +78,26 @@ body {
   border-radius: 4px;
 }
 
-/* 🌊 갤러리 전체 컨테이너 (PC: 3열 그리드 / 순서: 1 2 3 / 4 5) */
+/* 🌊 갤러리 전체 컨테이너 (PC: 3열 폭포수 갤러리) */
 .gallery-container {
   flex: 1;
   padding: 60px 40px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);  /* 가로 3열 균등 배치 */
-  gap: 30px;                              /* 카드 사이의 가로/세로 간격 */
+  column-count: 3;           /* PC에서 3열로 분할 */
+  column-gap: 30px;          /* 열 사이 가로 간격 */
   box-sizing: border-box;
-  align-content: start;                   /* 위쪽부터 차곡차곡 정렬 */
+  height: auto;
 }
 
 /* 개별 작품 카드 */
 .work-card {
+  break-inside: avoid;       /* 카드가 열 사이에서 중간에 잘리지 않도록 방지 */
+  margin-bottom: 30px;       /* 카드 세로 간격 */
   position: relative;
   border-radius: 4px;
   overflow: hidden;
   width: 100%;
   background-color: #1a1a1a;
+  display: inline-block;     /* 이미지가 아래로 뚝 떨어지지 않고 열에 딱 맞게 정렬 */
 }
 
 /* 이미지 박스 및 호버 기준점 */
@@ -114,7 +116,7 @@ body {
   transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-/* 🖼️ 마우스 올렸을 때 사진 호버 효과[cite: 3] */
+/* 🖼️ 마우스 올렸을 때 사진 호버 효과 */
 .media-box:hover img {
   filter: brightness(0.4) grayscale(30%);
   transform: scale(1.03);
@@ -157,7 +159,7 @@ body {
   margin: 0;
 }
 
-/* 📱 모바일 기기 (768px 이하)[cite: 3] */
+/* 📱 모바일 기기 (768px 이하) */
 @media screen and (max-width: 768px) {
   body {
     flex-direction: column;
@@ -174,10 +176,17 @@ body {
     border-bottom: 1px solid #222222;
   }
 
-  /* 모바일에서는 1열 세로 정렬[cite: 3] */
+  .artist-bio {
+    margin-bottom: 15px;
+  }
+
+  /* 모바일에서는 세로 1열 정렬 */
   .gallery-container {
-    grid-template-columns: 1fr;
+    column-count: 1;
     padding: 30px 20px;
-    gap: 20px;
+  }
+
+  .work-card {
+    margin-bottom: 20px;
   }
 }
