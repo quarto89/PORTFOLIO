@@ -78,29 +78,36 @@ body {
   border-radius: 4px;
 }
 
-/* 🌊 갤러리 전체 컨테이너 (PC: 3열 폭포수 갤러리) */
+/* 🌊 갤러리 전체 컨테이너 (기둥 3개 나란히 정렬) */
 .gallery-container {
   flex: 1;
   padding: 60px 40px;
-  column-count: 3;           /* PC에서 3열로 분할 */
-  column-gap: 30px;          /* 열 사이 가로 간격 */
+  display: flex;
+  gap: 30px;                 /* 기둥 사이 간격 */
   box-sizing: border-box;
+  align-items: flex-start;   /* 기둥별로 위로 바짝 붙게 정렬 */
   height: auto;
+}
+
+/* 각각의 기둥 (1번, 2번, 3번 기둥) */
+.gallery-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;                 /* 한 기둥 안에서 카드 끼리 위아래 간격 */
+  width: 0;                  /* 3개의 기둥 너비가 완전 동일하게 고정 */
 }
 
 /* 개별 작품 카드 */
 .work-card {
-  break-inside: avoid;       /* 카드가 열 사이에서 중간에 잘리지 않도록 방지 */
-  margin-bottom: 30px;       /* 카드 세로 간격 */
   position: relative;
   border-radius: 4px;
   overflow: hidden;
   width: 100%;
   background-color: #1a1a1a;
-  display: inline-block;     /* 이미지가 아래로 뚝 떨어지지 않고 열에 딱 맞게 정렬 */
 }
 
-/* 이미지 박스 및 호버 기준점 */
+/* 이미지 박스 (세로 고정 없이 원래 비율대로 원본 유지) */
 .media-box {
   position: relative;
   width: 100%;
@@ -111,7 +118,7 @@ body {
 
 .media-box img {
   width: 100%;
-  height: auto;
+  height: auto;              /* 비율 고정 해제 - 원본 세로 비율 그대로 출력 */
   display: block;
   transition: filter 0.3s ease, transform 0.3s ease;
 }
@@ -176,17 +183,15 @@ body {
     border-bottom: 1px solid #222222;
   }
 
-  .artist-bio {
-    margin-bottom: 15px;
-  }
-
-  /* 모바일에서는 세로 1열 정렬 */
+  /* 모바일에서는 기둥 1, 2, 3번이 순서대로 1열 세로 정렬 */
   .gallery-container {
-    column-count: 1;
+    flex-direction: column;
     padding: 30px 20px;
+    gap: 20px;
   }
 
-  .work-card {
-    margin-bottom: 20px;
+  .gallery-column {
+    width: 100%;
+    gap: 20px;
   }
 }
